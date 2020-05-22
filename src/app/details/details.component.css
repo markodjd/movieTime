@@ -1,0 +1,148 @@
+h1,
+h3 {
+  color: white;
+}
+
+h1 {
+  font-size: 2.6rem;
+  border-bottom: 2px solid rgb(123, 31, 162);
+  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+a {
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: calc(100vh - 104px);
+}
+
+.content {
+  margin: 0 20px;
+  position: relative;
+  height: 100%;
+  width: 70%;
+}
+
+img {
+  height: 100%;
+  object-fit: cover;
+  width: 30%;
+}
+
+.links {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.links a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+  margin-right: 20px;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+.imdb-link {
+  width: 152px;
+}
+
+.imdb {
+  width: 60px;
+}
+
+.youtube-link {
+  width: 135px;
+}
+
+.youtube {
+  width: 60px;
+}
+
+span {
+  font-size: 16px;
+}
+
+span:first-child {
+  margin-left: 50px;
+}
+
+span + span {
+  margin-left: 10px;
+}
+
+.watch {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 7px 25px;
+}
+
+.mat-button-toggle {
+  background-color: rgb(123, 78, 143);
+}
+
+.mat-button-toggle-checked {
+  background-color: rgb(123, 31, 162);
+}
+
+.player {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 50px;
+  background-color: rgb(123, 31, 162);
+  color: white;
+  margin: 0;
+  cursor: default;
+}
+
+.X {
+  font-size: 2.3rem;
+  margin-right: 30px;
+  transform: rotate(45deg);
+  cursor: pointer;
+}
+
+.loading {
+  height: calc(100vh - 64px);
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(36, 34, 34);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#movie-player {
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}

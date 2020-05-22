@@ -1,0 +1,29 @@
+.movie {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  color: white;
+  overflow: hidden;
+  margin: 3px 2px;
+  border-radius: 5px;
+}
+
+.movie img {
+  height: 296px;
+  width: 196px;
+  object-fit: cover;
+  border: 2px solid grey;
+  border-radius: 5px;
+  position: relative;
+}
+
+a:hover > .movie img {
+  opacity: 0.5;
+  border-color: rgb(123, 31, 162);
+}
+
+a:hover > .movie {
+  transform: scale(1.03);
+}

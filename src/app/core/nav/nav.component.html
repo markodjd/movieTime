@@ -1,0 +1,21 @@
+<mat-toolbar color="primary" role="heading">
+  <button [routerLink]="['/home']" class="logo" mat-button>MovieTime</button>
+  <button mat-button [matMenuTriggerFor]="genre">
+    <mat-icon>menu</mat-icon>
+    Genres
+  </button>
+  <mat-menu #genre="matMenu">
+    <div class="genres">
+      <button *ngFor="let item of genres" mat-menu-item>
+        {{ item }}
+      </button>
+    </div>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="sort">
+    <mat-icon>sort</mat-icon>
+    Sort
+  </button>
+  <mat-menu #sort="matMenu">
+    <button mat-menu-item>Item 1</button>
+  </mat-menu>
+</mat-toolbar>

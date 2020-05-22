@@ -1,0 +1,14 @@
+{
+  "/movies/**": {
+    "target": "https://movies-v2.api-fetch.sh",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/movie/**": {
+    "target": "https://movies-v2.api-fetch.sh",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

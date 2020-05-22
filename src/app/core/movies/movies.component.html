@@ -1,0 +1,6 @@
+<div class="movies">
+  <app-movie *ngFor="let item of movies?.movies" [movie]="item"></app-movie>
+  <div *ngIf="!movies?.movies" class="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

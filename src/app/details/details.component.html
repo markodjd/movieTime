@@ -1,0 +1,56 @@
+<div class="row">
+  <img *ngIf="movie?.banner" src="{{ movie?.banner }}" alt="" />
+  <img *ngIf="!movie?.banner" src="../../assets/images/default.jpeg" alt="" />
+  <div *ngIf="movie" class="content">
+    <h1>
+      {{ movie?.title
+      }}<span *ngFor="let item of movie?.genres"> &bull; {{ item }}</span>
+    </h1>
+    <h3>{{ movie?.synopsis }}</h3>
+    <div class="links">
+      <a (click)="playTrailer()" class="youtube-link">
+        <img class="youtube" src="../../assets/images/youtube.svg" alt="" />
+        See trailer
+      </a>
+      <a
+        target="_blank"
+        class="imdb-link"
+        href="https://www.imdb.com/title/{{
+          movie?.imdb_id
+        }}/?ref_=nv_sr_srsg_3"
+      >
+        <img class="imdb" src="../../assets/images/imdb.svg" alt="" />
+        See on IMDb
+      </a>
+      <mat-button-toggle-group>
+        <mat-button-toggle *ngIf="movie?.torrent720pUrl" value="720p"
+          >720p</mat-button-toggle
+        >
+        <mat-button-toggle *ngIf="movie?.torrent1080pUrl" checked value="1080p"
+          >1080p</mat-button-toggle
+        >
+      </mat-button-toggle-group>
+      <button
+        (click)="playMovie()"
+        class="watch"
+        mat-raised-button
+        color="primary"
+      >
+        Watch Now!
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="movieId" class="player">
+  <a class="close"><span (click)="exitTrailer()" class="X">&#43;</span></a>
+  <youtube-player
+    height="{{ window().innerHeight - 50 }}"
+    width="{{ window().innerWidth }}"
+    videoId="{{ movieId }}"
+  ></youtube-player>
+</div>
+<div *ngIf="!movie" class="loading">
+  <mat-spinner></mat-spinner>
+</div>
+<button (click)="stopMovie()">Stop</button>
+<div *ngIf="isAppended" id="movie-player"></div>
