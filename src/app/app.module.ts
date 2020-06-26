@@ -17,6 +17,9 @@ import { DetailsComponent } from "./details/details.component";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { YouTubePlayerModule } from "@angular/youtube-player";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatSelectModule } from "@angular/material/select";
+import { FormsModule } from "@angular/forms";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -39,6 +42,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     MatButtonToggleModule,
     YouTubePlayerModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
+    FormsModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

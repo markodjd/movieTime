@@ -1,8 +1,8 @@
-<a [routerLink]="['/home/', movie._id]" href="">
+<a (click)="openDialog(movie?.imdb_id)" href="javascript:;">
   <div class="movie">
     <img *ngIf="movie.banner" src="{{ movie.banner }}" alt="" />
     <img *ngIf="!movie.banner" src="../../assets/images/default.jpeg" alt="" />
     <p>{{ movie.title }}</p>
-    <p>{{ movie.poster }}</p>
+    <small>{{ movie.year }}</small>
   </div>
 </a>

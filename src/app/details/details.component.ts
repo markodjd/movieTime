@@ -1,10 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Inject } from "@angular/core";
 import { MoviesService } from "../services/movies.service";
-import { ActivatedRoute } from "@angular/router";
 import { Movie } from "../models/movie";
-
-var WebTorrent = require("webtorrent-hybrid");
-var client = new WebTorrent();
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
   selector: "app-details",
@@ -13,19 +10,24 @@ var client = new WebTorrent();
 })
 export class DetailsComponent implements OnInit {
   movie: Movie;
-  movieId: string = "";
+  movieId: any = "";
   isAppended = false;
+  magnet: string;
+  player = false;
 
-  constructor(private service: MoviesService, private route: ActivatedRoute) {}
+  constructor(
+    private service: MoviesService,
+    @Inject(MAT_DIALOG_DATA) public id: any
+  ) {}
 
   ngOnInit(): void {
     this.getMovie();
   }
 
   getMovie() {
-    let id = this.route.snapshot.params["id"];
-    this.service.getDetails(id).subscribe((data) => {
+    this.service.getDetails(this.id).subscribe((data) => {
       this.movie = data;
+      this.getMagnet();
     });
   }
 
@@ -42,23 +44,39 @@ export class DetailsComponent implements OnInit {
   }
 
   getMagnet() {
-    return this.movie.torrent1080pUrl;
+    if (this.movie.torrent1080pUrl) {
+      this.magnet = this.movie.torrent1080pUrl;
+    } else {
+      this.magnet = this.movie.torrent720pUrl;
+    }
+  }
+
+  changeMagnet(el) {
+    this.magnet = el.value;
   }
 
   playMovie() {
-    this.isAppended = true;
+    console.log(this.magnet);
+    var WebTorrent = require("webtorrent-hybrid");
+    var client = new WebTorrent();
 
-    var torrentId = this.movie?.torrent1080pUrl;
+    var torrentId = this.magnet;
+
+    this.player = true;
 
     client.add(torrentId, function (torrent) {
-      var file = torrent.files.find(function (file) {
-        return file.name.endsWith(".mp4");
+      torrent.files.forEach(function (file) {
+        torrent.files.find(function (file) {
+          if (
+            file.name.endsWith(".mp4") ||
+            file.name.endsWith(".avi") ||
+            file.name.endsWith(".mkv") ||
+            file.name.endsWith(".mpeg")
+          ) {
+            file.appendTo("#movie-player");
+          }
+        });
       });
-      file.appendTo("#movie-player", [{ autoplay: true, muted: true }]);
     });
-  }
-
-  stopMovie() {
-    client.destroy(() => console.log("destroyed"));
   }
 }

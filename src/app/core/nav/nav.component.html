@@ -1,21 +1,41 @@
 <mat-toolbar color="primary" role="heading">
-  <button [routerLink]="['/home']" class="logo" mat-button>MovieTime</button>
-  <button mat-button [matMenuTriggerFor]="genre">
-    <mat-icon>menu</mat-icon>
-    Genres
+  <button (click)="resetQuery()" class="logo" mat-button>
+    MovieTime
   </button>
-  <mat-menu #genre="matMenu">
-    <div class="genres">
-      <button *ngFor="let item of genres" mat-menu-item>
+  <small>Genres: </small>
+  <mat-form-field MatFormFieldControl>
+    <mat-select (selectionChange)="sendGenre($event)" [(value)]="params.genre">
+      <mat-option *ngFor="let item of genres" [value]="item">
         {{ item }}
-      </button>
-    </div>
-  </mat-menu>
-  <button mat-button [matMenuTriggerFor]="sort">
-    <mat-icon>sort</mat-icon>
-    Sort
-  </button>
-  <mat-menu #sort="matMenu">
-    <button mat-menu-item>Item 1</button>
-  </mat-menu>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <small>Sort: </small>
+  <mat-form-field MatFormFieldControl>
+    <mat-select (selectionChange)="sendSort($event)" [(value)]="params.sort">
+      <mat-option *ngFor="let item of sort" [value]="item">
+        {{ item }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-icon>search</mat-icon>
+  <mat-form-field MatFormFieldControl class="search">
+    <input
+      (keyup.enter)="sendKeywords($event)"
+      class="search-input"
+      matInput
+      type="text"
+      [(ngModel)]="params.keywords"
+    />
+    <button
+      mat-button
+      *ngIf="params.keywords"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="resetQuery()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
 </mat-toolbar>

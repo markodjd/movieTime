@@ -37,17 +37,28 @@ export class Movie {
     this.runtime = (obj && obj.runtime) || "";
     this.released = (obj && obj.released) || 0;
     this.certification = (obj && obj.certification) || "";
-    this.torrent1080pUrl = (obj && obj.torrents.en["1080p"].url) || "";
+    this.torrent1080pUrl =
+      (obj && obj.torrents.en["1080p"] && obj.torrents.en["1080p"].url) || "";
     this.torrent1080pFileSize =
-      (obj && obj.torrents.en["1080p"].filesize) || "";
-    this.torrent1080pSize = (obj && obj.torrents.en["1080p"].size) || 0;
-    this.torrent1080pSeed = (obj && obj.torrents.en["1080p"].seed) || 0;
-    this.torrent1080pPeer = (obj && obj.torrents.en["1080p"].peer) || 0;
-    this.torrent720pUrl = (obj && obj.torrents.en["720p"].url) || "";
-    this.torrent720pFileSize = (obj && obj.torrents.en["720p"].filesize) || "";
-    this.torrent1080pSize = (obj && obj.torrents.en["720p"].size) || 0;
-    this.torrent1080pSeed = (obj && obj.torrents.en["720p"].seed) || 0;
-    this.torrent1080pPeer = (obj && obj.torrents.en["720p"].peer) || 0;
+      (obj && obj.torrents.en["1080p"] && obj.torrents.en["1080p"].filesize) ||
+      "";
+    this.torrent1080pSize =
+      (obj && obj.torrents.en["1080p"] && obj.torrents.en["1080p"].size) || 0;
+    this.torrent1080pSeed =
+      (obj && obj.torrents.en["1080p"] && obj.torrents.en["1080p"].seed) || 0;
+    this.torrent1080pPeer =
+      (obj && obj.torrents.en["1080p"] && obj.torrents.en["1080p"].peer) || 0;
+    this.torrent720pUrl =
+      (obj && obj.torrents.en["720p"] && obj.torrents.en["720p"].url) || "";
+    this.torrent720pFileSize =
+      (obj && obj.torrents.en["720p"] && obj.torrents.en["720p"].filesize) ||
+      "";
+    this.torrent1080pSize =
+      (obj && obj.torrents.en["720p"] && obj.torrents.en["720p"].size) || 0;
+    this.torrent1080pSeed =
+      (obj && obj.torrents.en["720p"] && obj.torrents.en["720p"].seed) || 0;
+    this.torrent1080pPeer =
+      (obj && obj.torrents.en["720p"] && obj.torrents.en["720p"].peer) || 0;
     this.trailer = (obj && obj.trailer) || "";
     this.genres = (obj && obj.genres) || [];
     this.poster = (obj && obj.images.poster) || "";

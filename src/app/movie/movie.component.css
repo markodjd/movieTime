@@ -1,5 +1,5 @@
 .movie {
-  width: 200px;
+  width: 160px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -11,8 +11,8 @@
 }
 
 .movie img {
-  height: 296px;
-  width: 196px;
+  height: 226px;
+  width: 156px;
   object-fit: cover;
   border: 2px solid grey;
   border-radius: 5px;
@@ -26,4 +26,20 @@ a:hover > .movie img {
 
 a:hover > .movie {
   transform: scale(1.03);
+}
+
+p {
+  width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-bottom: 0;
+}
+
+small {
+  color: grey;
+}
+
+::ng-deep .mat-dialog-container {
+  background-color: rgb(36, 34, 34);
 }

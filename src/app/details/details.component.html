@@ -1,15 +1,18 @@
+<a class="close"><span matDialogClose class="X">&#43;</span></a>
 <div class="row">
   <img *ngIf="movie?.banner" src="{{ movie?.banner }}" alt="" />
-  <img *ngIf="!movie?.banner" src="../../assets/images/default.jpeg" alt="" />
+  <img *ngIf="!movie?.banner" src="assets/images/default.jpeg" alt="" />
   <div *ngIf="movie" class="content">
-    <h1>
-      {{ movie?.title
-      }}<span *ngFor="let item of movie?.genres"> &bull; {{ item }}</span>
-    </h1>
+    <div class="title">
+      <h1>
+        {{ movie?.title }}
+      </h1>
+      <span *ngFor="let item of movie?.genres"> &bull; {{ item }}</span>
+    </div>
     <h3>{{ movie?.synopsis }}</h3>
     <div class="links">
       <a (click)="playTrailer()" class="youtube-link">
-        <img class="youtube" src="../../assets/images/youtube.svg" alt="" />
+        <img class="youtube" src="assets/images/youtube.svg" alt="" />
         See trailer
       </a>
       <a
@@ -19,14 +22,20 @@
           movie?.imdb_id
         }}/?ref_=nv_sr_srsg_3"
       >
-        <img class="imdb" src="../../assets/images/imdb.svg" alt="" />
+        <img class="imdb" src="assets/images/imdb.svg" alt="" />
         See on IMDb
       </a>
-      <mat-button-toggle-group>
-        <mat-button-toggle *ngIf="movie?.torrent720pUrl" value="720p"
+      <mat-button-toggle-group (change)="changeMagnet($event)">
+        <mat-button-toggle
+          *ngIf="movie?.torrent720pUrl"
+          [checked]="!movie?.torrent1080pUrl"
+          [value]="movie?.torrent720pUrl"
           >720p</mat-button-toggle
         >
-        <mat-button-toggle *ngIf="movie?.torrent1080pUrl" checked value="1080p"
+        <mat-button-toggle
+          *ngIf="movie?.torrent1080pUrl"
+          checked
+          [value]="movie?.torrent1080pUrl"
           >1080p</mat-button-toggle
         >
       </mat-button-toggle-group>
@@ -46,11 +55,11 @@
   <youtube-player
     height="{{ window().innerHeight - 50 }}"
     width="{{ window().innerWidth }}"
-    videoId="{{ movieId }}"
+    videoId="{{ movieId + '?autoplay=1&mute=1' }}"
+    SameSite="None"
   ></youtube-player>
 </div>
 <div *ngIf="!movie" class="loading">
   <mat-spinner></mat-spinner>
 </div>
-<button (click)="stopMovie()">Stop</button>
-<div *ngIf="isAppended" id="movie-player"></div>
+<div id="movie-player" *ngIf="player"></div>

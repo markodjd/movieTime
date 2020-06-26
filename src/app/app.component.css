@@ -5,8 +5,9 @@
 }
 
 .row {
-  height: 100%;
+  min-height: calc(100vh - 64px);
   padding: 20px;
   background-color: rgb(36, 34, 34);
   min-height: calc(100vh - 64px);
+  margin-top: 64px;
 }

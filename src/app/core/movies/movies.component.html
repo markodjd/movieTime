@@ -1,6 +1,13 @@
-<div class="movies">
+<div (scroll)="nextPage()" class="movies">
   <app-movie *ngFor="let item of movies?.movies" [movie]="item"></app-movie>
   <div *ngIf="!movies?.movies" class="loading">
     <mat-spinner></mat-spinner>
   </div>
+  <h1 id="no-movies" *ngIf="movies?.movies.length === 0">
+    No movies with that name
+  </h1>
+  <mat-spinner
+    style="margin: 0 auto; margin-top: 60px;"
+    *ngIf="loading"
+  ></mat-spinner>
 </div>
