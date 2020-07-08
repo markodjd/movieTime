@@ -3,6 +3,9 @@ import { MoviesService } from "../services/movies.service";
 import { Movie } from "../models/movie";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
+var WebTorrent = require("webtorrent-hybrid");
+var client = new WebTorrent();
+
 @Component({
   selector: "app-details",
   templateUrl: "./details.component.html",
@@ -14,6 +17,8 @@ export class DetailsComponent implements OnInit {
   isAppended = false;
   magnet: string;
   player = false;
+  loadingMovie: boolean;
+  downloadSpeed: number;
 
   constructor(
     private service: MoviesService,
@@ -56,27 +61,34 @@ export class DetailsComponent implements OnInit {
   }
 
   playMovie() {
-    console.log(this.magnet);
-    var WebTorrent = require("webtorrent-hybrid");
-    var client = new WebTorrent();
-
+    let _this = this;
     var torrentId = this.magnet;
+    this.loadingMovie = false;
 
     this.player = true;
 
     client.add(torrentId, function (torrent) {
-      torrent.files.forEach(function (file) {
-        torrent.files.find(function (file) {
-          if (
-            file.name.endsWith(".mp4") ||
-            file.name.endsWith(".avi") ||
-            file.name.endsWith(".mkv") ||
-            file.name.endsWith(".mpeg")
-          ) {
-            file.appendTo("#movie-player");
-          }
-        });
+      torrent.files.forEach((file) => {
+        if (
+          file.name.endsWith(".mp4") ||
+          file.name.endsWith(".avi") ||
+          file.name.endsWith(".mpeg")
+        ) {
+          client.on("torrent", (torrent) => {
+            _this.loadingMovie = true;
+            this.downloadSpeed = client.downloadSpeed;
+          });
+          file.renderTo("#movie-player");
+        }
       });
+    });
+  }
+
+  exitMovie() {
+    let torrentId = this.magnet;
+    this.player = false;
+    client.remove(torrentId, function () {
+      console.log(`Removed: \n\n\ ${torrentId}`);
     });
   }
 }

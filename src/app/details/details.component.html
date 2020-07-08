@@ -59,7 +59,10 @@
     SameSite="None"
   ></youtube-player>
 </div>
-<div *ngIf="!movie" class="loading">
+<div *ngIf="!movie || loadingMovie === false" class="loading">
   <mat-spinner></mat-spinner>
 </div>
-<div id="movie-player" *ngIf="player"></div>
+<div *ngIf="player" class="video-container">
+  <a class="close"><span (click)="exitMovie()" class="X">&#43;</span></a>
+  <video id="movie-player" autoplay controls></video>
+</div>

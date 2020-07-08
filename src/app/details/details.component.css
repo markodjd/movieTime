@@ -154,13 +154,20 @@ span + span {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10000;
 }
 
-#movie-player {
+.video-container {
   background-color: black;
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
+}
+
+#movie-player {
+  height: calc(100% - 50px);
+  width: 100%;
+  outline: none;
 }

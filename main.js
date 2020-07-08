@@ -15,7 +15,7 @@ function createWindow() {
 
   // Open the DevTools.
   win.webContents.openDevTools();
-  // win.removeMenu();
+  win.removeMenu();
   win.maximize();
 }
 
